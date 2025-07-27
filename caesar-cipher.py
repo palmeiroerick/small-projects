@@ -9,8 +9,8 @@ class Letters:
 
 def main():
     text = input("Text: ")
-    key = int(input("Key: "))
-    print(cipher(text, key))
+    for value in hack_cipher(text).values():
+        print(value)
 
 
 def cipher(text: str, key: int) -> str:
@@ -34,8 +34,25 @@ def decipher(text: str, key: int) -> str:
     return cipher(text, key * -1)
 
 
-def hackcipher():
-    ...
+def hack_cipher(text: str) -> str:
+    options: dict = {key: cipher(text, key) for key in range(1, 25)} 
+
+    with open("./dictonary", "r") as file:
+        words: set = {word.strip() for word in file}
+
+    for key, value in options.items():
+        possible_words = value.split(" ")
+
+        valid_words[key] = 0
+
+        for possible_word in possible_words:
+            if possible_word.lower() in words:
+                valid_words[key] += 1
+
+    for key, value in options.items():
+
+
+    return options
 
 
 if __name__ == "__main__":
